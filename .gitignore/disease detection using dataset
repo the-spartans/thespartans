@@ -1,0 +1,104 @@
+import numpy as np 
+import matplotlib.pyplot as pt
+import pandas as pd
+from sklearn.tree import DecisionTreeClassifier
+
+
+
+import csv
+csvData=[[ 'condition','stage','length','width','colour-hue'],
+['healthy','not affected','3','2','0.0081'],
+['healthy','not affected','3.2','1.8','0.0095'],
+['healthy','not affected','2.7','2','0.0101'],
+['healthy','not affected','3.1','1.8','0.0081'],
+['healthy','not affected','3.3','2.1','0.1071'],
+['healthy','not affected','3','2','0.0091'],
+['healthy','not affected','3.2','1.8','0.0098'],
+['healthy','not affected','3.1','2.2','0.0091'],
+['healthy','not affected','3.1','2.1','0.0091'],
+['healthy','not affected','2.9','0.9','0.0082'],
+['healthy','not affected','2.4','1.9','0.00102'],
+['healthy','not affected','2.8','1.7','0.0086'],
+['healthy','not affected','2.5','1.76','0.00102'],
+['healthy','not affected','2.87','1.99','0.0090'],
+['healthy','not affected','2.49','1.6','0.00112'],
+['healthy','not affected','2.97','1.89','0.0082'],
+['healthy','not affected','2.6','1.8','0.0094'],
+['healthy','not affected','2.2','1.6','0.0082'],
+['healthy','not affected','2.78','1.9','0.00102'],
+['healthy','not affected','2.9','2.1','0.0082'],
+['healthy','not affected','2.3','1.9','0.00102'],
+['unhealthy','stage II','1.8','0.8','0.1061'],
+['unhealthy','stage I','2.3','1.0','0.1061'],
+['unhealthy','stage II ','2','0.5','0.1065'],
+['unhealthy','stage III','1.4','1.2','0.1121'],
+['unhealthy','stage III','1.2','0.2','0.1181'],
+['unhealthy','stage II','1.9','0.4','0.1281'],
+['unhealthy','stage III','1.2','0.2','0.1181'],
+['unhealthy','stage III','1.9','0.4','0.1281'],
+['unhealthy','stage II','1.7','0.2','0.1281'],
+['unhealthy','stage III','1.5','1.5','0.1181'],
+['unhealthy','stage II','2.5','1.5','0.1071'],
+['unhealthy','stage I','2.5','1.5','0.0081'],
+['unhealthy','stage I','2.4','1.6','0.0088'],
+['unhealthy','stage III','1.5','0.5','0.1081'],
+['unhealthy','stage I','2.5','1.5','0.0079'],
+['unhealthy','stage II','2.3','1.7','0.0181'],
+['unhealthy','stage I','2.5','1.5','0.1171'],
+['unhealthy','stage III','1.5','1.1','0.1111'],
+['unhealthy','stage I','2.7','1.7','0.0101'],
+['unhealthy','stage III','1.5','0.5','0.1181'],
+['unhealthy','stage I','2.8','1.9','0.1091'],
+['unhealthy','stage II','1.6','1.3','0.1181']]
+
+with open('leaf.csv', 'w') as csvFile:
+    writer = csv.writer(csvFile,dialect='excel')
+    writer.writerows(csvData)
+
+csvFile.close()
+
+
+
+import csv
+
+with open('leaf.csv', 'r') as csvFile:
+    reader = csv.reader(csvFile,dialect='excel')
+    for row in reader:
+        print(row)
+
+csvFile.close()
+
+
+
+data = pd.read_csv("leaf.csv").as_matrix()
+
+clf=DecisionTreeClassifier()
+
+
+
+xtest=data[0:43:,2:]
+leaf_label=data[0:43:,0]
+clf.fit(xtest,leaf_label)
+
+xtest=data[0:43:,2:]
+actual_label=data[0:43:,0]
+d=xtest[33]
+
+
+
+print(clf.predict([xtest[33]]))
+
+
+
+xtest=data[0:43:,2:]
+leaf_label=data[0:43,1]
+clf.fit(xtest,leaf_label)
+clf.fit(xtest,leaf_label)
+
+xtest=data[0:43:,2:]
+actual_label=data[0:43:,0]
+d=xtest[33]
+
+
+
+print(clf.predict([xtest[33]]))
